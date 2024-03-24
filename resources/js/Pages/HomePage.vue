@@ -32,3 +32,4 @@ import Contact from '@/Components/Contact.vue';
   <Footer />
 
 </template>
+

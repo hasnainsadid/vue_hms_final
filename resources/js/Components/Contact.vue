@@ -10,42 +10,80 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form_container contact-form">
-            <form action="">
+            <Form @submit="formsubmit" :validation-schema="schema" >
               <div class="form-row">
                 <div class="col-lg-6">
                   <div>
-                    <input type="text" placeholder="Your Name" />
+                    <Field type="text" name="name" v-model="formData.name" placeholder="Your Name" />
+                    <ErrorMessage name="name" class="text-danger"/>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div>
-                    <input type="text" placeholder="Phone Number" />
+                    <Field type="email" name="email" v-model="formData.email" placeholder="Email" />
+                    <ErrorMessage name="email" class="text-danger" />
                   </div>
                 </div>
               </div>
               <div>
-                <input type="email" placeholder="Email" />
+                <Field type="text" name="subject" v-model="formData.subject" placeholder="Subject" />
+                <ErrorMessage name="subject" class="text-danger" />
               </div>
               <div>
-                <input type="text" class="message-box" placeholder="Message" />
+                <Field type="text" name="message" v-model="formData.message" class="message-box" placeholder="Message" />
+                <ErrorMessage name="message" class="text-danger" />
               </div>
               <div class="btn_box">
-                <button class="w-25 m-auto d-block mt-4">
+                <button type="submit" class="w-25 m-auto d-block mt-4">
                   SEND
                 </button>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
-        <!-- <div class="col-md-6">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </section>
   <!-- end contact section -->
 </template>
+
+<script>
+import { Form, Field, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
+import axios from 'axios';
+
+export default {
+  components: { Form, Field, ErrorMessage },
+  data() {
+    return {
+      schema: yup.object({
+        name: yup.string().required(),
+        email: yup.string().email().required(),
+        subject: yup.string().required(),
+        message: yup.string().required(),
+      }),
+      formData: {
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      }
+    };
+  },
+  methods: {
+    formsubmit() {
+      axios.post('/messages', this.formData)
+        .then(() => {
+          alert('Thanks for your feedback');
+          this.formData.name = '';
+          this.formData.email = '';
+          this.formData.subject = '';
+          this.formData.message = '';
+        })
+        .catch(error => {
+          console.error('Error submitting form:', error);
+        });
+    }
+  }
+}
+</script>

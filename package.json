@@ -18,6 +18,8 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
-        "vue-router": "^4.3.0"
+        "vee-validate": "^4.12.6",
+        "vue-router": "^4.3.0",
+        "yup": "^1.4.0"
     }
 }
