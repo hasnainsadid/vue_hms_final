@@ -4,7 +4,7 @@ const {departments} = usePage().props
 </script>
 <style scoped>
   .card {
-  background-color: rgb(142, 177, 244);
+  background-color: rgb(122, 165, 107);
 }
 </style>
 
