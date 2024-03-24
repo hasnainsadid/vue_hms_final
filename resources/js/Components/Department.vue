@@ -2,6 +2,11 @@
 import { usePage } from '@inertiajs/vue3';
 const {departments} = usePage().props
 </script>
+<style scoped>
+  .card {
+  background-color: rgb(142, 177, 244);
+}
+</style>
 
 <template>
   <!-- department section -->
@@ -17,11 +22,8 @@ const {departments} = usePage().props
           </p>
         </div>
         <div class="row">
-          <div class="col-md-3 my-4" v-for="dept in departments">
+          <div class="col-md-3 my-4 bgc" v-for="dept in departments">
             <div class="card" style="height: 280px; overflow-y: hidden;">
-              <!-- <div class="img-box">
-                <img src="frontend/assets/images/s1.png" alt="">
-              </div> -->
               <div class="detail-box">
                 <h5 class="card-header text-center">
                   {{dept.name}}
